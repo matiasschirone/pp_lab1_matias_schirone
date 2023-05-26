@@ -14,15 +14,19 @@ while True:
         case 1:
            mostrar_lista_de_jugadores(lista_jugadores)
         case 2:
-            pass
+            seleccion = int(input("Selecciona un jugador por su índice: ")) - 1
+            buscar_jugador(lista_jugadores,seleccion)
         case 3:
-            pass
-        case 4:
-            pass
+            jugador_seleccionado = lista_jugadores[seleccion]
+            guardar_en_csv("jugador_seleccionado.csv", jugador_seleccionado)
+        case 4:            
+            nombre_jugador = input("Ingrese el nombre (o parte del nombre) del jugador que desea buscar: ").lower()
+            buscar_jugador_por_nombre(lista_jugadores, nombre_jugador)
         case 5:
-           pass
+           calcular_promedio_puntos_equipo(lista_jugadores)
         case 6:
-            pass
+            nombre_jugador = input("Ingrese el nombre del jugador: ")
+            verificar_miembro_hall_of_fame(lista_jugadores,nombre_jugador)
         case 7:
             pass
         case 8:
