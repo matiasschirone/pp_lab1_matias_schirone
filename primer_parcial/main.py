@@ -28,13 +28,13 @@ while True:
             nombre_jugador = input("Ingrese el nombre del jugador: ")
             verificar_miembro_hall_of_fame(lista_jugadores,nombre_jugador)
         case 7:
-            pass
+            jugador_con_mayor_rebotes(lista_jugadores)
         case 8:
-            pass
+            jugador_con_mayor_porcentaje_tiros_campo(lista_jugadores)
         case 9:
-            pass
+            jugador_con_mayor_cantidad_asistencias(lista_jugadores)
         case 10:
-            pass
+            jugador_con_mayor_puntos_por_partido(lista_jugadores)
         case 11:
             pass
         case 12:
