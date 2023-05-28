@@ -308,7 +308,7 @@ def jugador_con_mayor_estadistica(lista_jugadores, key, descripcion_estadistica)
     else:
         print("No se encontró información de los jugadores.")
 
-
+'''
 def mostrar_jugadores_mayor_promedio_puntos(lista_jugadores,valor_ingresado):
    
     jugadores_seleccionados = []
@@ -354,6 +354,53 @@ def mostrar_jugadores_mas_asistencias_promedio(lista_jugadores, valor_ingresado)
             print("- {0}".format(jugador))
     else:
         print("No se encontraron jugadores con promedio de asistencias por partido mayor a {0}".format(valor_ingresado))
+
+'''
+
+def mostrar_jugadores_mayor_promedio(lista_jugadores, valor_ingresado, key):
+    jugadores_seleccionados = []
+
+    for jugador in lista_jugadores:
+        promedio = jugador["estadisticas"][key]
+        if promedio > valor_ingresado:
+            jugadores_seleccionados.append(jugador["nombre"])
+
+    if jugadores_seleccionados:
+        print("Jugadores con promedio de {0} mayor a {1}:".format(key, valor_ingresado))
+        for jugador in jugadores_seleccionados:
+            print("- {0}".format(jugador))
+    else:
+        print("No se encontraron jugadores con promedio de {0} mayor a {1}".format(key, valor_ingresado))
+
+
+def calcular_promedio_puntos_equipo_sin_el_mas_bajo(lista_jugadores):
+    puntos_por_jugador = []
+
+    # Calcular puntos por partido para cada jugador
+    for jugador in lista_jugadores:
+        puntos_totales = jugador["estadisticas"]["puntos_totales"]
+        temporadas = jugador["estadisticas"]["temporadas"]
+        puntos_por_partido = puntos_totales / temporadas
+        puntos_por_jugador.append((jugador["nombre"], puntos_por_partido))
+
+    # Encontrar al jugador con el menor promedio de puntos por partido
+    jugador_menor_promedio = puntos_por_jugador[0]  # Suponemos que el primer jugador tiene el menor promedio
+    for jugador in puntos_por_jugador:
+        if jugador[1] < jugador_menor_promedio[1]:
+            jugador_menor_promedio = jugador
+
+    # Remover al jugador con el menor promedio de puntos por partido
+    puntos_por_jugador.remove(jugador_menor_promedio)
+
+    n = len(puntos_por_jugador)
+    for i in range(n - 1):
+        for j in range(0, n - i - 1):
+            if puntos_por_jugador[j][0] > puntos_por_jugador[j + 1][0]:
+                puntos_por_jugador[j], puntos_por_jugador[j + 1] = puntos_por_jugador[j + 1], puntos_por_jugador[j]
+
+    print("Promedio de puntos por partido del equipo del Dream Team:")
+    for jugador in puntos_por_jugador:
+        print("- {0}: {1}".format(jugador[0], jugador[1]))
 
 
 

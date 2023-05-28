@@ -4,7 +4,7 @@ from funciones import *
 
 
 while True:
-    opcion = input("\n1- Mostrar la lista de jugadores\n2- Mostrar estadisticas de jugador\n3- Guardar estadisticas\n4- ostrar logros de un jugador\n5- promedio de puntos por partido\n6-Mostrar si pertenece al salon de la fama\n7- Jugador con mayor cantidad de rebotes\n8-Jugador con mayor porcenaje tiros de campo\n9- Jugador con mayor cantidad de asistencias\n10- Jugadores que han promediado mas puntos por partido\n11- Jugadores que han promediado mas rebotes por partido\n12- Jugadores que han promediado mas asistencias por partido\n13- Jugador con mayor cantidad de robos totales\n14- Jugador con mayor cantidad de bloqueos totales\n15- Jugadores que que superan el porcentaje de tiros libres\n16- Promedio de puntos por partido del equipo excluyendo al jugador con la menor cantidad de puntos\n17- Ingresar un valor y mostrar los jugadores que hayan tenido un porcentaje de tiros triples superior\n19- Jugador con la mayor cantidad de temporadas jugadas\n20- ingresar un valor y mostrar los jugadores , ordenados por posición en la cancha, que hayan tenido un porcentaje de tiros de campo superior\n0- Salir del programa\nIngrese la opción deseada: ")
+    opcion = input("\n1- Mostrar la lista de jugadores\n2- Mostrar estadisticas de jugador\n3- Guardar estadisticas\n4- ostrar logros de un jugador\n5- promedio de puntos por partido\n6-Mostrar si pertenece al salon de la fama\n7- Jugador con mayor cantidad de rebotes\n8-Jugador con mayor porcenaje tiros de campo\n9- Jugador con mayor cantidad de asistencias\n10- Jugadores que han promediado mas puntos por partido\n11- Jugadores que han promediado mas rebotes por partido\n12- Jugadores que han promediado mas asistencias por partido\n13- Jugador con mayor cantidad de robos totales\n14- Jugador con mayor cantidad de bloqueos totales\n15- Jugadores que que superan el porcentaje de tiros libres\n16- Promedio de puntos por partido del equipo excluyendo al jugador con la menor cantidad de puntos\n17- Jugador con mayor cantidad de logros obtenidos\n18- Ingresar un valor y mostrar los jugadores que hayan tenido un porcentaje de tiros triples superior\n19- Jugador con la mayor cantidad de temporadas jugadas\n20- ingresar un valor y mostrar los jugadores , ordenados por posición en la cancha, que hayan tenido un porcentaje de tiros de campo superior\n0- Salir del programa\nIngrese la opción deseada: ")
         
 
     respuesta_int = int(opcion)
@@ -36,29 +36,33 @@ while True:
         case 10:
             ingreso = input("Ingrese un valor de promedio de puntos por partido: ")
             valor_ingresado = float(ingreso)
-            mostrar_jugadores_mayor_promedio_puntos(lista_jugadores, valor_ingresado)
+            mostrar_jugadores_mayor_promedio(lista_jugadores, valor_ingresado,"promedio_puntos_por_partido")
         case 11:
             ingreso = input("Ingrese un valor de promedio de rebotes por partido: ")
             valor_ingresado = float(ingreso)
-            mostrar_jugadores_mas_rebotes_promedio(lista_jugadores, valor_ingresado)
+            mostrar_jugadores_mayor_promedio(lista_jugadores, valor_ingresado, "promedio_rebotes_por_partido")
         case 12:
+            ingreso = input("Ingrese un valor de promedio de asistencias por partido: ")
+            valor_ingresado = float(ingreso)
+            mostrar_jugadores_mayor_promedio(lista_jugadores, valor_ingresado, "promedio_asistencias_por_partido")
+        case 13:
+            jugador_con_mayor_estadistica(lista_jugadores, "robos_totales", "robos totales")
+        case 14:
+            jugador_con_mayor_estadistica(lista_jugadores, "bloqueos_totales", "bloqueos totales")
+        case 15:
             ingreso = input("Ingrese un valor de promedio de rebotes por partido: ")
             valor_ingresado = float(ingreso)
-            mostrar_jugadores_mas_asistencias_promedio(lista_jugadores, valor_ingresado)
-        case 13:
-            pass
-        case 14:
-            pass
-        case 15:
-            pass
+            mostrar_jugadores_mayor_promedio(lista_jugadores, valor_ingresado, "porcentaje_tiros_libres")
         case 16:
-            pass
+            calcular_promedio_puntos_equipo_sin_el_mas_bajo(lista_jugadores)
         case 17:
             pass
         case 18:
-            pass
+            ingreso = input("Ingrese un valor de promedio de rebotes por partido: ")
+            valor_ingresado = float(ingreso)
+            mostrar_jugadores_mayor_promedio(lista_jugadores, valor_ingresado, "porcentaje_tiros_triples")
         case 19:
-            pass
+            jugador_con_mayor_estadistica(lista_jugadores, "temporadas", "temporadas")
         case 20:
             pass
         case 0:
