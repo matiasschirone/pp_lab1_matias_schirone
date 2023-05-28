@@ -207,7 +207,7 @@ def verificar_miembro_hall_of_fame(lista_jugadores,nombre_jugador):
 
     print("No se encontró información del jugador {0}.".format(nombre_jugador).lower())
 
-
+'''
 def jugador_con_mayor_rebotes(lista_jugadores):
     maximo_rebotes = None
     jugador_con_mas_rebotes = None
@@ -290,7 +290,70 @@ def jugador_con_mayor_puntos_por_partido(lista_jugadores):
     else:
         print("No se encontró información de los jugadores.")
 
+'''
 
+def jugador_con_mayor_estadistica(lista_jugadores, key, descripcion_estadistica):
+    maximo_valor = None
+    jugador_con_maximo_valor = None
+
+    for jugador in lista_jugadores:
+        valor_estadistica = jugador["estadisticas"][key]
+        if maximo_valor is None or valor_estadistica > maximo_valor:
+            maximo_valor = valor_estadistica
+            jugador_con_maximo_valor = jugador["nombre"]
+
+    if jugador_con_maximo_valor is not None:
+        print("El jugador con el mayor {0} es: {1}".format(descripcion_estadistica, jugador_con_maximo_valor))
+        print("{0}: {1}".format(descripcion_estadistica, maximo_valor))
+    else:
+        print("No se encontró información de los jugadores.")
+
+
+def mostrar_jugadores_mayor_promedio_puntos(lista_jugadores,valor_ingresado):
+   
+    jugadores_seleccionados = []
+
+    for jugador in lista_jugadores:
+        promedio_puntos = jugador["estadisticas"]["promedio_puntos_por_partido"]
+        if promedio_puntos > valor_ingresado:
+            jugadores_seleccionados.append(jugador["nombre"])
+
+    if jugadores_seleccionados:
+        print("Jugadores con promedio de puntos por partido mayor a {0}:".format(valor_ingresado))
+        for jugador in jugadores_seleccionados:
+            print("- {0}".format(jugador))
+    else:
+        print("No se encontraron jugadores con promedio de puntos por partido mayor a {0}".format(valor_ingresado))
+
+def mostrar_jugadores_mas_rebotes_promedio(lista_jugadores, valor_ingresado):
+    jugadores_seleccionados = []
+
+    for jugador in lista_jugadores:
+        promedio_rebotes = jugador["estadisticas"]["promedio_rebotes_por_partido"]
+        if promedio_rebotes > valor_ingresado:
+            jugadores_seleccionados.append(jugador["nombre"])
+
+    if jugadores_seleccionados:
+        print("Jugadores con promedio de rebotes por partido mayor a {0}:".format(valor_ingresado))
+        for jugador in jugadores_seleccionados:
+            print("- {0}".format(jugador))
+    else:
+        print("No se encontraron jugadores con promedio de rebotes por partido mayor a {0}".format(valor_ingresado))
+
+def mostrar_jugadores_mas_asistencias_promedio(lista_jugadores, valor_ingresado):
+    jugadores_seleccionados = []
+
+    for jugador in lista_jugadores:
+        promedio_asistencias = jugador["estadisticas"]["promedio_asistencias_por_partido"]
+        if promedio_asistencias > valor_ingresado:
+            jugadores_seleccionados.append(jugador["nombre"])
+
+    if jugadores_seleccionados:
+        print("Jugadores con promedio de asistencias por partido mayor a {0}:".format(valor_ingresado))
+        for jugador in jugadores_seleccionados:
+            print("- {0}".format(jugador))
+    else:
+        print("No se encontraron jugadores con promedio de asistencias por partido mayor a {0}".format(valor_ingresado))
 
 
 

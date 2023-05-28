@@ -28,17 +28,23 @@ while True:
             nombre_jugador = input("Ingrese el nombre del jugador: ")
             verificar_miembro_hall_of_fame(lista_jugadores,nombre_jugador)
         case 7:
-            jugador_con_mayor_rebotes(lista_jugadores)
+            jugador_con_mayor_estadistica(lista_jugadores, "rebotes_totales", "cantidad de rebotes totales")
         case 8:
-            jugador_con_mayor_porcentaje_tiros_campo(lista_jugadores)
+            jugador_con_mayor_estadistica(lista_jugadores, "porcentaje_tiros_de_campo", "porcentaje de tiros de campo")
         case 9:
-            jugador_con_mayor_cantidad_asistencias(lista_jugadores)
+            jugador_con_mayor_estadistica(lista_jugadores, "asistencias_totales", "cantidad de asistencias")
         case 10:
-            jugador_con_mayor_puntos_por_partido(lista_jugadores)
+            ingreso = input("Ingrese un valor de promedio de puntos por partido: ")
+            valor_ingresado = float(ingreso)
+            mostrar_jugadores_mayor_promedio_puntos(lista_jugadores, valor_ingresado)
         case 11:
-            pass
+            ingreso = input("Ingrese un valor de promedio de rebotes por partido: ")
+            valor_ingresado = float(ingreso)
+            mostrar_jugadores_mas_rebotes_promedio(lista_jugadores, valor_ingresado)
         case 12:
-            pass
+            ingreso = input("Ingrese un valor de promedio de rebotes por partido: ")
+            valor_ingresado = float(ingreso)
+            mostrar_jugadores_mas_asistencias_promedio(lista_jugadores, valor_ingresado)
         case 13:
             pass
         case 14:
