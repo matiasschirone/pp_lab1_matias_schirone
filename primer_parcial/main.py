@@ -54,9 +54,9 @@ while True:
             valor_ingresado = float(ingreso)
             mostrar_jugadores_mayor_promedio(lista_jugadores, valor_ingresado, "porcentaje_tiros_libres")
         case 16:
-            calcular_promedio_puntos_equipo_sin_el_mas_bajo(lista_jugadores)
+            calcular_promedio_puntos_equipo(lista_jugadores, excluir_jugador_bajo=True)
         case 17:
-            pass
+            jugador_con_mayor_logro(lista_jugadores, "logros", "logros")
         case 18:
             ingreso = input("Ingrese un valor de promedio de rebotes por partido: ")
             valor_ingresado = float(ingreso)
@@ -64,7 +64,9 @@ while True:
         case 19:
             jugador_con_mayor_estadistica(lista_jugadores, "temporadas", "temporadas")
         case 20:
-            pass
+            ingreso = input("Ingrese un valor de promedio de tiros de campo: ")
+            valor_ingresado = float(ingreso)
+            mostrar_jugadores_mayor_porcentaje_tiros_de_campo(lista_jugadores, valor_ingresado, "porcentaje_tiros_de_campo")
         case 0:
             break
     
