@@ -73,8 +73,13 @@ def imprimir_dato(string):
 
 
 def mostrar_lista_de_jugadores(lista_jugadores):
+    """
+    La función "mostrar_lista_de_jugadores" toma una lista de jugadores e imprime sus nombres mediante
+    las funciones "obtener_nombre" e "imprimir_dato".
     
-    
+    :param lista_jugadores: Una lista de jugadores, donde cada jugador se representa como un diccionario
+    con su información (como nombre, edad, posición, etc.)
+    """
     for jugador in lista_jugadores:
                 nombre = obtener_nombre(jugador)
                 imprimir_dato(nombre)
