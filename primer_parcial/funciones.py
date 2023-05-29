@@ -302,7 +302,7 @@ def calcular_promedio_puntos_equipo(lista_jugadores, excluir_jugador_bajo=False)
         # Remover al jugador con el menor promedio de puntos por partido
         puntos_por_jugador.remove(jugador_menor_promedio)
 
-    # Ordenar la lista en orden ascendente según el nombre del jugador (sin utilizar sort)
+    # Ordenar la lista en orden ascendente según el nombre del jugador 
     n = len(puntos_por_jugador)
     for i in range(n - 1):
         for j in range(0, n - i - 1):
