@@ -36,7 +36,7 @@ while True:
                 calcular_promedio_puntos_equipo(lista_jugadores)
             case 6:
                 nombre_jugador = input("Ingrese el nombre del jugador: ")
-                if re.match(r'^[a-zA-Z ]+\s[a-zA-Z]+$', nombre_jugador):
+                if re.match(r'^[a-zA-Z]+\s[a-zA-Z]+$', nombre_jugador):
                     verificar_miembro_hall_of_fame(lista_jugadores, nombre_jugador)
                 else:
                     print("Ingrese solo letras y respete los espacios. Inténtelo nuevamente.")             
