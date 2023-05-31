@@ -302,6 +302,18 @@ def calcular_promedio_puntos_equipo(lista_jugadores, excluir_jugador_bajo=False)
         # Remover al jugador con el menor promedio de puntos por partido
         puntos_por_jugador.remove(jugador_menor_promedio)
 
+    '''
+    n = len(puntos_por_jugador)
+    i = 0
+
+    while i < n - 1:
+        for j in range(0, n - i - 1):
+            if puntos_por_jugador[j][0] > puntos_por_jugador[j + 1][0]:
+                puntos_por_jugador[j], puntos_por_jugador[j + 1] = puntos_por_jugador[j + 1], puntos_por_jugador[j]
+        i += 1
+
+    '''
+
     # Ordenar la lista en orden ascendente según el nombre del jugador 
     n = len(puntos_por_jugador)
     for i in range(n - 1):
@@ -366,3 +378,109 @@ def mostrar_jugadores_mayor_porcentaje_tiros_de_campo(lista_jugadores, valor_ing
                 imprimir_dato(nombre)
     else:
         imprimir_dato("No se encontraron jugadores con promedio de {0} mayor a {1}".format(key, valor_ingresado))
+
+
+'''
+def calcular_posiciones_ranking(lista_jugadores):
+    n = len(lista_jugadores)
+
+    posiciones_puntos = [0] * n
+    posiciones_rebotes = [0] * n
+    posiciones_asistencias = [0] * n
+    posiciones_robos = [0] * n
+
+    for i in range(n):
+        puntos_jugador = lista_jugadores[i]["estadisticas"]["puntos_totales"]
+        rebotes_jugador = lista_jugadores[i]["estadisticas"]["rebotes_totales"]
+        asistencias_jugador = lista_jugadores[i]["estadisticas"]["asistencias_totales"]
+        robos_jugador = lista_jugadores[i]["estadisticas"]["robos_totales"]
+
+        for j in range(n):
+            if puntos_jugador > lista_jugadores[j]["estadisticas"]["puntos_totales"]:
+                posiciones_puntos[i] += 1
+            if rebotes_jugador > lista_jugadores[j]["estadisticas"]["rebotes_totales"]:
+                posiciones_rebotes[i] += 1
+            if asistencias_jugador > lista_jugadores[j]["estadisticas"]["asistencias_totales"]:
+                posiciones_asistencias[i] += 1
+            if robos_jugador > lista_jugadores[j]["estadisticas"]["robos_totales"]:
+                posiciones_robos[i] += 1
+
+    archivo_salida = "ranking.csv"
+
+    with open(archivo_salida, "w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(["Jugador", "Puntos", "Rebotes", "Asistencias", "Robos"])
+
+        for i in range(n):
+            jugador = lista_jugadores[i]["nombre"]
+            posicion_puntos = posiciones_puntos[i] + 1
+            posicion_rebotes = posiciones_rebotes[i] + 1
+            posicion_asistencias = posiciones_asistencias[i] + 1
+            posicion_robos = posiciones_robos[i] + 1
+
+            writer.writerow([jugador, posicion_puntos, posicion_rebotes, posicion_asistencias, posicion_robos])
+
+        # Agregar una fila vacía para separar el encabezado del cuerpo del cuadro
+        writer.writerow([])
+
+    return archivo_salida
+
+'''
+'''
+
+def imprimir_guarda_tabla_jugadores(lista_jugadores):
+    archivo_salida = "tabla_jugadores.csv"
+
+    with open(archivo_salida, "w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(["Jugador", "Puntos", "Rebotes", "Asistencias", "Robos"])
+
+        for jugador in lista_jugadores:
+            jugador_data = [
+                jugador["nombre"],
+                jugador["estadisticas"]["puntos_totales"],
+                jugador["estadisticas"]["rebotes_totales"],
+                jugador["estadisticas"]["asistencias_totales"],
+                jugador["estadisticas"]["robos_totales"]
+            ]
+            writer.writerow(jugador_data)
+
+    print(f"La tabla de jugadores se ha guardado correctamente en el archivo {archivo_salida}")
+'''
+import pandas as pd
+
+def imprimir_guarda_tabla_jugadores(lista_jugadores):
+    archivo_salida = "tabla_jugadores.csv"
+
+    jugadores_data = []
+    for jugador in lista_jugadores:
+        jugador_data = [
+            jugador["nombre"],
+            jugador["estadisticas"]["puntos_totales"],
+            jugador["estadisticas"]["rebotes_totales"],
+            jugador["estadisticas"]["asistencias_totales"],
+            jugador["estadisticas"]["robos_totales"]
+        ]
+        jugadores_data.append(jugador_data)
+
+    df = pd.DataFrame(jugadores_data, columns=["Jugador", "Puntos", "Rebotes", "Asistencias", "Robos"])
+    df.to_csv(archivo_salida, index=False)
+
+    print(f"La tabla de jugadores se ha guardado correctamente en el archivo {archivo_salida}")
+
+
+
+def contar_jugadores_por_posicion(lista_jugadores):
+    jugadores_por_posicion = {}
+
+    for jugador in lista_jugadores:
+        posicion = jugador["posicion"]
+
+        if posicion in jugadores_por_posicion:
+            jugadores_por_posicion[posicion] += 1
+        else:
+            jugadores_por_posicion[posicion] = 1
+
+    return jugadores_por_posicion
+
+

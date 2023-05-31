@@ -4,14 +4,14 @@ import re
 
 
 def validar_opcion_menu(opcion):
-    if re.match(r"^(0|[1-9]|1[0-9]|20)$", opcion):
+    if re.match(r"^(0|[1-9]|1[0-9]|2[0-3])$", opcion):
         return True
     else:
         return False
 
 
 while True:
-    opcion = input("\n1- Mostrar la lista de jugadores\n2- Mostrar estadisticas de jugador\n3- Guardar estadisticas\n4- Mostrar logros de un jugador\n5- Promedio de puntos por partido\n6- Mostrar si pertenece al salón de la fama\n7- Jugador con mayor cantidad de rebotes\n8- Jugador con mayor porcentaje de tiros de campo\n9- Jugador con mayor cantidad de asistencias\n10- Jugadores que han promediado más puntos por partido\n11- Jugadores que han promediado más rebotes por partido\n12- Jugadores que han promediado más asistencias por partido\n13- Jugador con mayor cantidad de robos totales\n14- Jugador con mayor cantidad de bloqueos totales\n15- Jugadores que superan el porcentaje de tiros libres\n16- Promedio de puntos por partido del equipo excluyendo al jugador con la menor cantidad de puntos\n17- Jugador con mayor cantidad de logros obtenidos\n18- Ingresar un valor y mostrar los jugadores que hayan tenido un porcentaje de tiros triples superior\n19- Jugador con la mayor cantidad de temporadas jugadas\n20- Ingresar un valor y mostrar los jugadores, ordenados por posición en la cancha, que hayan tenido un porcentaje de tiros de campo superior\n0- Salir del programa\nIngrese la opción deseada: ")
+    opcion = input("\n1- Mostrar la lista de jugadores\n2- Mostrar estadisticas de jugador\n3- Guardar estadisticas\n4- Mostrar logros de un jugador\n5- Promedio de puntos por partido\n6- Mostrar si pertenece al salón de la fama\n7- Jugador con mayor cantidad de rebotes\n8- Jugador con mayor porcentaje de tiros de campo\n9- Jugador con mayor cantidad de asistencias\n10- Jugadores que han promediado más puntos por partido\n11- Jugadores que han promediado más rebotes por partido\n12- Jugadores que han promediado más asistencias por partido\n13- Jugador con mayor cantidad de robos totales\n14- Jugador con mayor cantidad de bloqueos totales\n15- Jugadores que superan el porcentaje de tiros libres\n16- Promedio de puntos por partido del equipo excluyendo al jugador con la menor cantidad de puntos\n17- Jugador con mayor cantidad de logros obtenidos\n18- Ingresar un valor y mostrar los jugadores que hayan tenido un porcentaje de tiros triples superior\n19- Jugador con la mayor cantidad de temporadas jugadas\n20- Ingresar un valor y mostrar los jugadores, ordenados por posición en la cancha, que hayan tenido un porcentaje de tiros de campo superior\n21- Cantidad de jugadores por cada poscicion\n22- Lista de jugadores en forma desc por cantidad de All Star\n23- Calcular de cada jugador cuál es su posición en puntos, rebotes, asistencias y robos\n24- Jugador tiene las mejores estadísticas en cada valor\n25- Jugador que tiene las mejores estadísticas de todos\n0 - Salir del programa\nIngrese la opción deseada: ")
 
     if validar_opcion_menu(opcion):
 
@@ -28,7 +28,7 @@ while True:
                 guardar_en_csv("jugador_seleccionado.csv", jugador_seleccionado)
             case 4:
                 nombre_jugador = input("Ingrese el nombre (o parte del nombre) del jugador que desea buscar: ").lower()
-                if re.match(r'^[a-zA-Z]+$',nombre_jugador):
+                if re.match(r"^[a-zA-Z]+$",nombre_jugador):
                     buscar_jugador_por_nombre(lista_jugadores, nombre_jugador)                  
                 else:
                     print("Ingrese solo letras. Inténtelo nuevamente.")          
@@ -36,7 +36,7 @@ while True:
                 calcular_promedio_puntos_equipo(lista_jugadores)
             case 6:
                 nombre_jugador = input("Ingrese el nombre del jugador: ")
-                if re.match(r'^[a-zA-Z]+\s[a-zA-Z]+$', nombre_jugador):
+                if re.match(r"^[a-zA-Z]+\s[a-zA-Z]+$", nombre_jugador):
                     verificar_miembro_hall_of_fame(lista_jugadores, nombre_jugador)
                 else:
                     print("Ingrese solo letras y respete los espacios. Inténtelo nuevamente.")             
@@ -98,12 +98,24 @@ while True:
                     mostrar_jugadores_mayor_porcentaje_tiros_de_campo(lista_jugadores, valor_ingresado, "porcentaje_tiros_de_campo")
                 else:
                     print("Valor no válido. Intente nuevamente.")
+            case 21:
+                jugadores_por_posicion = contar_jugadores_por_posicion(lista_jugadores)
+                imprimir_dato(jugadores_por_posicion)
+            case 22:
+                pass   
+            case 23:
+                imprimir_guarda_tabla_jugadores(lista_jugadores)
+            case 24:
+                pass
+            case 25:
+                pass
             case 0:
                 break
 
-        input("\nPulse enter para continuar\n")
+        #input("\nPulse enter para continuar\n")
     else:
-        print("ocion no valida. intente buevamente")
+        print("opcion no valida. intente buevamente")
+    input("\nPulse enter para continuar\n")
 
 
 
