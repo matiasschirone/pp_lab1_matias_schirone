@@ -104,7 +104,7 @@ while True:
             case 22:
                 pass   
             case 23:
-                imprimir_guarda_tabla_jugadores(lista_jugadores)
+                calcular_posiciones_ranking(lista_jugadores)
             case 24:
                 pass
             case 25:

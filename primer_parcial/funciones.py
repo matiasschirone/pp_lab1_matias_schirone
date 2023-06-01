@@ -380,7 +380,7 @@ def mostrar_jugadores_mayor_porcentaje_tiros_de_campo(lista_jugadores, valor_ing
         imprimir_dato("No se encontraron jugadores con promedio de {0} mayor a {1}".format(key, valor_ingresado))
 
 
-'''
+
 def calcular_posiciones_ranking(lista_jugadores):
     n = len(lista_jugadores)
 
@@ -425,48 +425,6 @@ def calcular_posiciones_ranking(lista_jugadores):
 
     return archivo_salida
 
-'''
-'''
-
-def imprimir_guarda_tabla_jugadores(lista_jugadores):
-    archivo_salida = "tabla_jugadores.csv"
-
-    with open(archivo_salida, "w", newline="") as file:
-        writer = csv.writer(file)
-        writer.writerow(["Jugador", "Puntos", "Rebotes", "Asistencias", "Robos"])
-
-        for jugador in lista_jugadores:
-            jugador_data = [
-                jugador["nombre"],
-                jugador["estadisticas"]["puntos_totales"],
-                jugador["estadisticas"]["rebotes_totales"],
-                jugador["estadisticas"]["asistencias_totales"],
-                jugador["estadisticas"]["robos_totales"]
-            ]
-            writer.writerow(jugador_data)
-
-    print(f"La tabla de jugadores se ha guardado correctamente en el archivo {archivo_salida}")
-'''
-import pandas as pd
-
-def imprimir_guarda_tabla_jugadores(lista_jugadores):
-    archivo_salida = "tabla_jugadores.csv"
-
-    jugadores_data = []
-    for jugador in lista_jugadores:
-        jugador_data = [
-            jugador["nombre"],
-            jugador["estadisticas"]["puntos_totales"],
-            jugador["estadisticas"]["rebotes_totales"],
-            jugador["estadisticas"]["asistencias_totales"],
-            jugador["estadisticas"]["robos_totales"]
-        ]
-        jugadores_data.append(jugador_data)
-
-    df = pd.DataFrame(jugadores_data, columns=["Jugador", "Puntos", "Rebotes", "Asistencias", "Robos"])
-    df.to_csv(archivo_salida, index=False)
-
-    print(f"La tabla de jugadores se ha guardado correctamente en el archivo {archivo_salida}")
 
 
 
