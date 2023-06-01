@@ -269,13 +269,26 @@ def mostrar_jugadores_mayor_promedio(lista_jugadores, valor_ingresado, key):
 
     return jugadores_seleccionados
 
+def ordenar_por_atributo(lista, atributo):
+    """
+    Esta función ordena una lista de diccionarios por un atributo dado.
 
+    :param lista: una lista de diccionarios que se desea ordenar.
+    :param atributo: el nombre del atributo por el cual se desea ordenar la lista.
+    :return: la función devuelve una lista de diccionarios `lista` ordenados por el valor del atributo especificado.
+    """
+    n = len(lista)
+    for i in range(n - 1):
+        for j in range(0, n - i - 1):
+            if lista[j][atributo] > lista[j + 1][atributo]:
+                lista[j], lista[j + 1] = lista[j + 1], lista[j]
+    return lista
 
 def calcular_promedio_puntos_equipo(lista_jugadores, excluir_jugador_bajo=False):
     """
     Esta función calcula el promedio de puntos por juego para cada jugador en una lista dada de
     jugadores y puede excluir opcionalmente al jugador con el promedio más bajo.
-    
+
     :param lista_jugadores: Una lista de diccionarios, donde cada diccionario representa a un jugador y
     contiene su nombre y estadísticas (puntos totales y temporadas jugadas)
     :param excluir_jugador_bajo: Este es un parámetro booleano que determina si se excluye o no al
@@ -290,36 +303,15 @@ def calcular_promedio_puntos_equipo(lista_jugadores, excluir_jugador_bajo=False)
         puntos_totales = jugador["estadisticas"]["puntos_totales"]
         temporadas = jugador["estadisticas"]["temporadas"]
         puntos_por_partido = puntos_totales / temporadas
-        puntos_por_jugador.append((jugador["nombre"], puntos_por_partido))
+        puntos_por_jugador.append({"nombre": jugador["nombre"], "puntos_por_partido": puntos_por_partido})
 
     # Encontrar al jugador con el menor promedio de puntos por partido
     if excluir_jugador_bajo:
-        jugador_menor_promedio = puntos_por_jugador[0]  # Suponemos que el primer jugador tiene el menor promedio
-        for jugador in puntos_por_jugador:
-            if jugador[1] < jugador_menor_promedio[1]:
-                jugador_menor_promedio = jugador
+        puntos_por_jugador = ordenar_por_atributo(puntos_por_jugador, "puntos_por_partido")
+        puntos_por_jugador = puntos_por_jugador[1:]  # Excluir al jugador con el menor promedio
 
-        # Remover al jugador con el menor promedio de puntos por partido
-        puntos_por_jugador.remove(jugador_menor_promedio)
-
-    '''
-    n = len(puntos_por_jugador)
-    i = 0
-
-    while i < n - 1:
-        for j in range(0, n - i - 1):
-            if puntos_por_jugador[j][0] > puntos_por_jugador[j + 1][0]:
-                puntos_por_jugador[j], puntos_por_jugador[j + 1] = puntos_por_jugador[j + 1], puntos_por_jugador[j]
-        i += 1
-
-    '''
-
-    # Ordenar la lista en orden ascendente según el nombre del jugador 
-    n = len(puntos_por_jugador)
-    for i in range(n - 1):
-        for j in range(0, n - i - 1):
-            if puntos_por_jugador[j][0] > puntos_por_jugador[j + 1][0]:
-                puntos_por_jugador[j], puntos_por_jugador[j + 1] = puntos_por_jugador[j + 1], puntos_por_jugador[j]
+    # Ordenar la lista por nombre del jugador
+    puntos_por_jugador = ordenar_por_atributo(puntos_por_jugador, "nombre")
 
     # Mostrar promedio de puntos por partido para todo el equipo
     if excluir_jugador_bajo:
@@ -328,13 +320,13 @@ def calcular_promedio_puntos_equipo(lista_jugadores, excluir_jugador_bajo=False)
         imprimir_dato("Promedio de puntos por partido del equipo del Dream Team:")
 
     for jugador in puntos_por_jugador:
-        imprimir_dato("- {0}: {1}".format(jugador[0], jugador[1]))
+        imprimir_dato("- {0}: {1}".format(jugador["nombre"], jugador["puntos_por_partido"]))
 
 
 def ordenar_por_posicion(jugadores):
     """
     Esta función ordena una lista de diccionarios de jugadores por su atributo de posición.
-    
+
     :param jugadores: una lista de diccionarios que representan a los jugadores de un equipo deportivo,
     donde cada diccionario contiene información sobre el jugador, como su nombre, posición y
     estadísticas. La función ordena la lista de jugadores por su posición en orden ascendente y devuelve
@@ -342,12 +334,8 @@ def ordenar_por_posicion(jugadores):
     :return: La función `ordenar_por_posicion` devuelve una lista de diccionarios `jugadores` ordenados
     por el valor de la clave "posicion" en orden ascendente.
     """
-    n = len(jugadores)
-    for i in range(n - 1):
-        for j in range(0, n - i - 1):
-            if jugadores[j]["posicion"] > jugadores[j + 1]["posicion"]:
-                jugadores[j], jugadores[j + 1] = jugadores[j + 1], jugadores[j]
-    return jugadores
+    return ordenar_por_atributo(jugadores, "posicion")
+
 
 def mostrar_jugadores_mayor_porcentaje_tiros_de_campo(lista_jugadores, valor_ingresado, key):
     """
@@ -441,3 +429,88 @@ def contar_jugadores_por_posicion(lista_jugadores):
     return jugadores_por_posicion
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+def calcular_promedio_puntos_equipo(lista_jugadores, excluir_jugador_bajo=False):
+    """
+    Esta función calcula el promedio de puntos por juego para cada jugador en una lista dada de
+    jugadores y puede excluir opcionalmente al jugador con el promedio más bajo.
+    
+    :param lista_jugadores: Una lista de diccionarios, donde cada diccionario representa a un jugador y
+    contiene su nombre y estadísticas (puntos totales y temporadas jugadas)
+    :param excluir_jugador_bajo: Este es un parámetro booleano que determina si se excluye o no al
+    jugador con el promedio de puntos por juego más bajo del cálculo del promedio de puntos por juego
+    del equipo. Si se establece en True, la función excluirá al jugador con el promedio de puntos más
+    bajo por juego. Si se establece en falso, defaults to False (optional)
+    """
+    puntos_por_jugador = []
+
+    # Calcular puntos por partido para cada jugador
+    for jugador in lista_jugadores:
+        puntos_totales = jugador["estadisticas"]["puntos_totales"]
+        temporadas = jugador["estadisticas"]["temporadas"]
+        puntos_por_partido = puntos_totales / temporadas
+        puntos_por_jugador.append((jugador["nombre"], puntos_por_partido))
+
+    # Encontrar al jugador con el menor promedio de puntos por partido
+    if excluir_jugador_bajo:
+        jugador_menor_promedio = puntos_por_jugador[0]  # Suponemos que el primer jugador tiene el menor promedio
+        for jugador in puntos_por_jugador:
+            if jugador[1] < jugador_menor_promedio[1]:
+                jugador_menor_promedio = jugador
+
+        # Remover al jugador con el menor promedio de puntos por partido
+        puntos_por_jugador.remove(jugador_menor_promedio)
+
+
+    # Ordenar la lista en orden ascendente según el nombre del jugador 
+    n = len(puntos_por_jugador)
+    for i in range(n - 1):
+        for j in range(0, n - i - 1):
+            if puntos_por_jugador[j][0] > puntos_por_jugador[j + 1][0]:
+                puntos_por_jugador[j], puntos_por_jugador[j + 1] = puntos_por_jugador[j + 1], puntos_por_jugador[j]
+
+    # Mostrar promedio de puntos por partido para todo el equipo
+    if excluir_jugador_bajo:
+        imprimir_dato("Promedio de puntos por partido del equipo del Dream Team (excluyendo al jugador con menor promedio):")
+    else:
+        imprimir_dato("Promedio de puntos por partido del equipo del Dream Team:")
+
+    for jugador in puntos_por_jugador:
+        imprimir_dato("- {0}: {1}".format(jugador[0], jugador[1]))
+
+
+def ordenar_por_posicion(jugadores):
+    """
+    Esta función ordena una lista de diccionarios de jugadores por su atributo de posición.
+    
+    :param jugadores: una lista de diccionarios que representan a los jugadores de un equipo deportivo,
+    donde cada diccionario contiene información sobre el jugador, como su nombre, posición y
+    estadísticas. La función ordena la lista de jugadores por su posición en orden ascendente y devuelve
+    la lista ordenada
+    :return: La función `ordenar_por_posicion` devuelve una lista de diccionarios `jugadores` ordenados
+    por el valor de la clave "posicion" en orden ascendente.
+    """
+    n = len(jugadores)
+    for i in range(n - 1):
+        for j in range(0, n - i - 1):
+            if jugadores[j]["posicion"] > jugadores[j + 1]["posicion"]:
+                jugadores[j], jugadores[j + 1] = jugadores[j + 1], jugadores[j]
+    return jugadores
+'''
