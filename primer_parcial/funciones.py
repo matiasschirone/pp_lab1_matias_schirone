@@ -380,7 +380,6 @@ def mostrar_jugadores_mayor_porcentaje_tiros_de_campo(lista_jugadores, valor_ing
         imprimir_dato("No se encontraron jugadores con promedio de {0} mayor a {1}".format(key, valor_ingresado))
 
 
-
 def calcular_posiciones_ranking(lista_jugadores):
     n = len(lista_jugadores)
 
