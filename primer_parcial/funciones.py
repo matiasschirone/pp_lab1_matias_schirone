@@ -172,9 +172,9 @@ def verificar_miembro_hall_of_fame(lista_jugadores,nombre_jugador):
     for jugador in lista_jugadores:
         if jugador["nombre"].lower() == nombre_jugador.lower():
             if "Miembro del Salon de la Fama del Baloncesto" in jugador["logros"]:
-                print("{0} es miembro del Salón de la Fama del Baloncesto.".format(nombre_jugador))
+                imprimir_dato("{0} es miembro del Salón de la Fama del Baloncesto.".format(nombre_jugador))
             else:
-                print("{0} no es miembro del Salón de la Fama del Baloncesto.".format(nombre_jugador))
+                imprimir_dato("{0} no es miembro del Salón de la Fama del Baloncesto.".format(nombre_jugador))
             return
 
     imprimir_dato("No se encontró información del jugador {0}.".format(nombre_jugador).lower())
@@ -225,7 +225,7 @@ def jugador_con_mayor_logro(lista_jugadores, key, descripcion):
 
     for jugador in lista_jugadores:
         logros = jugador["logros"]
-        valor_logros = len(logros)  # Obtenemos la cantidad de logros del jugador
+        valor_logros = len(logros)  
 
         if maximo_valor is None or valor_logros > maximo_valor:
             maximo_valor = valor_logros
@@ -332,11 +332,11 @@ def calcular_promedio_puntos_equipo(lista_jugadores, excluir_jugador_bajo=False)
 
     # Encontrar al jugador con el menor promedio de puntos por partido
     if excluir_jugador_bajo:
-        puntos_por_jugador = ordenar_por_atributo(puntos_por_jugador, "puntos_por_partido")
+        puntos_por_jugador = ordenar_por_atributo(puntos_por_jugador, "puntos_por_partido",True)
         puntos_por_jugador = puntos_por_jugador[1:]  # Excluir al jugador con el menor promedio
 
     # Ordenar la lista por nombre del jugador
-    puntos_por_jugador = ordenar_por_atributo(puntos_por_jugador, "nombre")
+    puntos_por_jugador = ordenar_por_atributo(puntos_por_jugador, "nombre", True)
 
     # Mostrar promedio de puntos por partido para todo el equipo
     if excluir_jugador_bajo:
@@ -359,7 +359,7 @@ def ordenar_por_posicion(jugadores):
     :return: La función `ordenar_por_posicion` devuelve una lista de diccionarios `jugadores` ordenados
     por el valor de la clave "posicion" en orden ascendente.
     """
-    return ordenar_por_atributo(jugadores, "posicion")
+    return ordenar_por_atributo(jugadores, "posicion",True)
 
 
 def mostrar_jugadores_mayor_porcentaje_tiros_de_campo(lista_jugadores, valor_ingresado, key):
@@ -484,11 +484,8 @@ def mostrar_jugadores_por_all_star(lista_jugadores):
         jugador['all_star'] = all_star
         jugadores_ordenados.append(jugador)
 
-    for i in range(len(jugadores_ordenados)):
-        for j in range(i + 1, len(jugadores_ordenados)):
-            if jugadores_ordenados[i]['all_star'] < jugadores_ordenados[j]['all_star']:
-                jugadores_ordenados[i], jugadores_ordenados[j] = jugadores_ordenados[j], jugadores_ordenados[i]
-
+   
+    ordenar_por_atributo(jugadores_ordenados, 'all_star', False)
 
     for jugador in jugadores_ordenados:
         nombre = jugador['nombre']
