@@ -18,6 +18,7 @@ while True:
         respuesta_int = int(opcion)
 
         match respuesta_int:
+            
             case 1:
                 mostrar_lista_de_jugadores(lista_jugadores)
             case 2:
