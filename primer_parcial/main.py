@@ -4,7 +4,7 @@ import re
 
 
 def validar_opcion_menu(opcion):
-    if re.match(r"^(0|[1-9]|1[0-9]|2[0-3])$", opcion):
+    if re.match(r"^(0|[1-9]|1[0-9]|2[0-5])$", opcion):
         return True
     else:
         return False
@@ -102,13 +102,17 @@ while True:
                 jugadores_por_posicion = contar_jugadores_por_posicion(lista_jugadores)
                 imprimir_dato(jugadores_por_posicion)
             case 22:
-                pass   
+                mostrar_jugadores_por_all_star(lista_jugadores)   
             case 23:
                 calcular_posiciones_ranking(lista_jugadores)
             case 24:
-                pass
+                obtener_mejores_estadisticas(lista_jugadores)
             case 25:
-                pass
+                mejor_jugador = obtener_mejor_jugador(lista_jugadores)
+                for categoria in mejor_jugador:
+                    resultado = mejor_jugador[categoria]
+                    imprimir_dato(f"{categoria}: {resultado}")
+                
             case 0:
                 break
 
