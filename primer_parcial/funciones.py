@@ -439,6 +439,14 @@ def calcular_posiciones_ranking(lista_jugadores):
 
 
 def contar_jugadores_por_posicion(lista_jugadores):
+    """
+    Esta función cuenta el número de jugadores para cada posición en una lista de jugadores.
+    
+    :param lista_jugadores: una lista de diccionarios, donde cada diccionario representa a un jugador y
+    contiene información sobre su posición, nombre, edad, etc
+    :return: La función `contar_jugadores_por_posicion` devuelve un diccionario que contiene el recuento
+    de jugadores para cada posición en la lista de entrada de jugadores.
+    """
     jugadores_por_posicion = {}
 
     for jugador in lista_jugadores:
@@ -451,27 +459,37 @@ def contar_jugadores_por_posicion(lista_jugadores):
 
     return jugadores_por_posicion
 
-import json
 
 def mostrar_jugadores_por_all_star(lista_jugadores):
+    """
+    Esta función toma una lista de jugadores y los ordena por la cantidad de premios All-Star que han
+    recibido, luego muestra sus nombres y la cantidad de premios All-Star.
+    
+    :param lista_jugadores: una lista de diccionarios, donde cada diccionario representa a un jugador y
+    contiene información como su nombre y logros. La función ordena a los jugadores en orden descendente
+    según la cantidad de veces que han sido seleccionados para el juego All-Star y devuelve la lista
+    ordenada
+    :return: una lista de diccionarios que contienen información sobre jugadores de baloncesto,
+    ordenados por el número de apariciones en el All-Star en orden descendente. La función también
+    imprime el nombre y el número de apariciones en el All-Star de cada jugador.
+    """
     jugadores_ordenados = []
     for jugador in lista_jugadores:
         all_star = 0
         for logro in jugador['logros']:
             if 'All-Star' in logro:
                 # Extraer la cantidad de All-Star del logro
-                all_star = int(logro.split()[0])  # Ejemplo: '14 veces All-Star' -> 14
+                all_star = int(logro.split()[0])  
                 break  # Solo se necesita el primer logro de All-Star
         jugador['all_star'] = all_star
         jugadores_ordenados.append(jugador)
 
-    # Ordenar los jugadores por la cantidad de All-Star de forma descendente
     for i in range(len(jugadores_ordenados)):
         for j in range(i + 1, len(jugadores_ordenados)):
             if jugadores_ordenados[i]['all_star'] < jugadores_ordenados[j]['all_star']:
                 jugadores_ordenados[i], jugadores_ordenados[j] = jugadores_ordenados[j], jugadores_ordenados[i]
 
-    # Mostrar los jugadores ordenados por la cantidad de All-Star
+
     for jugador in jugadores_ordenados:
         nombre = jugador['nombre']
         all_star = jugador['all_star']
@@ -482,6 +500,13 @@ def mostrar_jugadores_por_all_star(lista_jugadores):
 
 
 def obtener_mejores_estadisticas(lista_jugadores):
+    """
+    Esta función toma una lista de jugadores y devuelve a los jugadores con las mejores estadísticas en
+    varias categorías.
+    
+    :param lista_jugadores: una lista de diccionarios, donde cada diccionario representa a un jugador y
+    contiene su nombre y estadísticas
+    """
     mejor_temporadas = None
     mejor_puntos_totales = None
     mejor_promedio_puntos = None
@@ -549,7 +574,18 @@ def obtener_mejores_estadisticas(lista_jugadores):
     imprimir_dato(f"Mayor porcentaje de tiros triples: {mejor_porcentaje_tiros_triples['nombre']} ({mejor_porcentaje_tiros_triples['estadisticas']['porcentaje_tiros_triples']})")
 
 
+
 def obtener_mejor_jugador(lista_jugadores):
+    """
+    Esta función toma una lista de jugadores y devuelve al jugador con el mayor número de temporadas,
+    puntos, rebotes y asistencias.
+    
+    :param lista_jugadores: una lista de diccionarios, donde cada diccionario representa a un jugador y
+    contiene su nombre y estadísticas (número de temporadas jugadas, puntos totales, rebotes totales y
+    asistencias totales)
+    :return: un diccionario con los nombres de los jugadores con mayor número de temporadas, total de
+    puntos, total de rebotes y total de asistencias, junto con sus respectivos valores.
+    """
     mejor_temporadas = None
     mejor_puntos_totales = None
     mejor_rebotes_totales = None
@@ -576,25 +612,7 @@ def obtener_mejor_jugador(lista_jugadores):
     }
 
     return resultado
-    imprimir_dato(resultado)
-
-
-
-
-'''
-Mostrar la lista de jugadores ordenadas por la cantidad de All-Star de forma descendente. La salida por pantalla debe tener un formato similar a este:
-Michael Jordan (14 veces All Star)
-Magic Johnson (12 veces All-Star)
-...
-
-Determinar qué jugador tiene las mejores estadísticas en cada valor. La salida por pantalla debe tener un formato similar a este:
-Mayor cantidad de temporadas: Karl Malone (19)
-Mayor cantidad de puntos totales: Karl Malon (36928)
-…
-
-Determinar qué jugador tiene las mejores estadísticas de todos.
-
-'''
+  
 
 
 
